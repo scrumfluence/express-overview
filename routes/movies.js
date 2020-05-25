@@ -23,8 +23,8 @@ const requiredKeys = [
     'director',
     'rating',
     'producer',
-    'revenue',
-    'rotten_tomato_rating'
+    'revenue'
+    
 ];
 
 const missingKeyError = {
