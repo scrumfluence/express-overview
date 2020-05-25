@@ -20,7 +20,8 @@ const requiredKeys = [
     'id',
     'title',
     'director',
-    'rating'
+    'rating',
+    'producer'
 ];
 
 const missingKeyError = {
@@ -40,7 +41,7 @@ router.get("/movies", (req, res) => {
 
 router.post("/movie", (req, res) => {
 
-    const validation = validateBody(req.body, false);
+    const validation = validateBody(req.body);
 
     if (validation.valid_body) {
 
@@ -78,7 +79,7 @@ router.delete("/movie/:id", (req, res) => {
 -------------------------------------------------- */
 
 
-function validateBody(body, checkId = true) {
+function validateBody(body) {
 
     const validation = {
         valid_body: true,
@@ -87,10 +88,11 @@ function validateBody(body, checkId = true) {
 
     for (let key of requiredKeys) {
 
-        if (key == 'id' && !checkId) { continue; }
+        if (key == 'id') { continue; }
         if (body.hasOwnProperty(key)) { continue; }
         validation.valid_body = false;
         validation.message = 'The ' + key + ' key is missing from the JSON body provided.';
+        break;
     }
 
     for (let key in body) {
@@ -120,6 +122,7 @@ function getDateTimeStamp() {
     timestamp.push(date.getHours());
     timestamp.push(date.getMinutes());
     timestamp.push(date.getSeconds());
+    timestamp.push(date.getMilliseconds());
     return timestamp.join('');
 }
 
