@@ -42,6 +42,10 @@ router.post("/movie", (req, res) => {
 
     const validation = validateBody(req.body, false);
 
+
+    // Post request validation
+
+
     if (validation.valid_body) {
 
         const movie = addMovie(req.body);
