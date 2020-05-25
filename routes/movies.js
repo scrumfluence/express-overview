@@ -17,11 +17,13 @@ module.exports = router;
 
 const movies = [];
 const requiredKeys = [
+    
     'id',
     'title',
     'director',
     'rating',
-    'producer'
+    'producer',
+    'box_office_revenue'
 ];
 
 const missingKeyError = {
@@ -42,10 +44,6 @@ router.get("/movies", (req, res) => {
 router.post("/movie", (req, res) => {
 
     const validation = validateBody(req.body);
-
-
-    // Post request validation
-
 
     if (validation.valid_body) {
 
